@@ -1,0 +1,174 @@
+# =============================================================
+# .github/workflows/deploy.yml
+# Pipeline CI/CD — GitHub Actions
+# Roda testes, build da imagem e deploy automático
+# =============================================================
+
+name: CI/CD — Hardware API
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Roda o robô de atualização de CPUs toda segunda às 04:00 UTC
+    - cron: '0 4 * * MON'
+  workflow_dispatch:
+    inputs:
+      fabricante:
+        description: 'Fabricante para atualizar (intel | amd | todos)'
+        required: false
+        default: 'todos'
+
+env:
+  IMAGE_NAME: hardware-api
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  # ── 1. Testes ──────────────────────────────────────────────
+  test:
+    name: Testes
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB:       hardware_db
+          POSTGRES_USER:     postgres
+          POSTGRES_PASSWORD: test_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt pytest httpx
+
+      - name: Criar schema no banco de teste
+        run: psql postgresql://postgres:test_password@localhost/hardware_db -f 01_banco_de_dados.sql
+        env:
+          PGPASSWORD: test_password
+
+      - name: Rodar testes
+        run: pytest tests/ -v --tb=short
+        env:
+          DB_HOST:     localhost
+          DB_PORT:     5432
+          DB_NAME:     hardware_db
+          DB_USER:     postgres
+          DB_PASSWORD: test_password
+
+  # ── 2. Build e Push da imagem Docker ───────────────────────
+  build:
+    name: Build Docker
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login no GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build e push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to:   type=gha,mode=max
+
+  # ── 3. Deploy no servidor ──────────────────────────────────
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push'
+    environment: production
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /opt/hardware-api
+            docker compose pull
+            docker compose up -d --no-deps api scheduler
+            docker image prune -f
+            echo "Deploy concluído em $(date)"
+
+  # ── 4. Robô de atualização (agendado ou manual) ────────────
+  robo-atualizacao:
+    name: Atualizar banco de CPUs e GPUs
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar robô de atualização (CPUs)
+        run: |
+          FAB="${{ github.event.inputs.fabricante || 'todos' }}"
+          echo "Atualizando fabricante: $FAB"
+          python 02_robo_cadastro_cpus.py --fabricante $FAB --todos
+        env:
+          DB_HOST:     ${{ secrets.DB_HOST }}
+          DB_PORT:     ${{ secrets.DB_PORT }}
+          DB_NAME:     ${{ secrets.DB_NAME }}
+          DB_USER:     ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+      - name: Rodar robô de atualização (GPUs)
+        run: |
+          FAB="${{ github.event.inputs.fabricante || 'todos' }}"
+          python 02b_robo_cadastro_gpus.py --fabricante $FAB --todos
+        env:
+          DB_HOST:     ${{ secrets.DB_HOST }}
+          DB_PORT:     ${{ secrets.DB_PORT }}
+          DB_NAME:     ${{ secrets.DB_NAME }}
+          DB_USER:     ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+      - name: Notificar Slack
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text:   "Robô de CPUs finalizado: ${{ job.status }}"
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

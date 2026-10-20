@@ -1,0 +1,9 @@
+.categoria-page { padding: 40px 0 60px; }
+
+.titulo-biblioteca { margin-bottom: 30px; }
+.titulo-biblioteca h1 { font-size: 30px; margin-bottom: 6px; }
+.titulo-biblioteca p { color: var(--text-2); font-size: 15px; }
+
+.grid-categorias { margin-bottom: 44px; }
+
+.resultado-categoria h2 { font-size: 20px; margin-bottom: 18px; }

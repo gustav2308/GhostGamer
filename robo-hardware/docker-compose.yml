@@ -1,0 +1,109 @@
+# =============================================================
+#  docker-compose.yml
+#  Sobe todo o sistema com um único comando:
+#    docker compose up -d
+# =============================================================
+
+services:
+
+  # ── Banco de dados PostgreSQL ─────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: hardware_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       hardware_db
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-senha123}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./01_banco_de_dados.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hardware_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── API FastAPI ───────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hardware_api
+    restart: unless-stopped
+    environment:
+      DB_HOST:     db
+      DB_PORT:     5432
+      DB_NAME:     hardware_db
+      DB_USER:     postgres
+      DB_PASSWORD: ${DB_PASSWORD:-senha123}
+      SLACK_WEBHOOK_URL:   ${SLACK_WEBHOOK_URL:-}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: uvicorn 05_api:app --host 0.0.0.0 --port 8000 --workers 2
+
+  # ── Agendador (robô automático) ───────────────────────────
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hardware_scheduler
+    restart: unless-stopped
+    environment:
+      DB_HOST:     db
+      DB_PORT:     5432
+      DB_NAME:     hardware_db
+      DB_USER:     postgres
+      DB_PASSWORD: ${DB_PASSWORD:-senha123}
+      SLACK_WEBHOOK_URL:   ${SLACK_WEBHOOK_URL:-}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL:-}
+      ROBO_SCRIPT: 02_robo_cadastro_cpus.py
+      GPU_ROBO_SCRIPT: 02b_robo_cadastro_gpus.py
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python 04_scheduler.py
+    # O agendador não sobe servidor HTTP nenhum, mas herdava do
+    # Dockerfile o healthcheck da API (curl .../health na porta 8000).
+    # Isso fazia este container ficar marcado como "unhealthy" para
+    # sempre. Desativado aqui porque não se aplica a este serviço.
+    healthcheck:
+      disable: true
+
+  # ── Painel web (consome a API acima) ──────────────────────
+  painel:
+    image: nginx:alpine
+    container_name: hardware_painel
+    restart: unless-stopped
+    volumes:
+      - ./painel:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+  # ── pgAdmin (interface visual do banco) ───────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: hardware_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL:    admin@hardware.local
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    profiles:
+      - dev    # só sobe com: docker compose --profile dev up
+
+volumes:
+  pg_data:

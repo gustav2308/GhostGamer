@@ -1,0 +1,24 @@
+
+# Configurações privadas
+.env
+.env.*
+!.env.example
+
+# Logs e arquivos temporários
+*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Arquivos gerados pelo Python
+**/build/
+**/dist/
+
+# Jogos grandes
+site-ghost-gamer/ASSETS/DOWNLOADS/*.zip
+site-ghost-gamer/ASSETS/DOWNLOADS/*.exe
+
+# Backups de bancos de dados
+*.dump
+*.bak

@@ -1,0 +1,42 @@
+2026-10-03 16:51:10,974 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 16:51:10,977 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 16:51:10,979 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 16:51:10,981 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 16:51:10,982 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 16:51:10,983 [INFO] Agendador iniciado. Pressione Ctrl+C para parar.
+2026-10-03 16:51:10,985 [INFO] Fuso horário: America/Sao_Paulo
+2026-10-03 16:51:10,991 [INFO] Added job "Atualizar CPUs Intel" to job store "default"
+2026-10-03 16:51:10,992 [INFO] Added job "Atualizar CPUs AMD" to job store "default"
+2026-10-03 16:51:10,994 [INFO] Added job "Atualizar GPUs (NVIDIA + AMD)" to job store "default"
+2026-10-03 16:51:10,994 [INFO] Added job "Atualização completa mensal" to job store "default"
+2026-10-03 16:51:10,996 [INFO] Added job "Health check banco de dados" to job store "default"
+2026-10-03 16:51:10,996 [INFO] Scheduler started
+2026-10-03 18:44:44,549 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 18:44:44,870 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 18:44:44,949 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 18:44:44,952 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 18:44:44,954 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-03 18:44:44,957 [INFO] Agendador iniciado. Pressione Ctrl+C para parar.
+2026-10-03 18:44:44,959 [INFO] Fuso horário: America/Sao_Paulo
+2026-10-03 18:44:45,105 [INFO] Added job "Atualizar CPUs Intel" to job store "default"
+2026-10-03 18:44:45,109 [INFO] Added job "Atualizar CPUs AMD" to job store "default"
+2026-10-03 18:44:45,111 [INFO] Added job "Atualizar GPUs (NVIDIA + AMD)" to job store "default"
+2026-10-03 18:44:45,114 [INFO] Added job "Atualização completa mensal" to job store "default"
+2026-10-03 18:44:45,116 [INFO] Added job "Health check banco de dados" to job store "default"
+2026-10-03 18:44:45,118 [INFO] Scheduler started
+2026-10-04 22:49:53,738 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-04 22:49:53,742 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-04 22:49:53,745 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-04 22:49:53,747 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-04 22:49:53,750 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-10-04 22:49:53,753 [INFO] Agendador iniciado. Pressione Ctrl+C para parar.
+2026-10-04 22:49:53,755 [INFO] Fuso horário: America/Sao_Paulo
+2026-10-04 22:49:53,763 [INFO] Added job "Atualizar CPUs Intel" to job store "default"
+2026-10-04 22:49:53,766 [INFO] Added job "Atualizar CPUs AMD" to job store "default"
+2026-10-04 22:49:53,768 [INFO] Added job "Atualizar GPUs (NVIDIA + AMD)" to job store "default"
+2026-10-04 22:49:53,769 [INFO] Added job "Atualização completa mensal" to job store "default"
+2026-10-04 22:49:53,772 [INFO] Added job "Health check banco de dados" to job store "default"
+2026-10-04 22:49:53,773 [INFO] Scheduler started
+2026-10-05 00:00:00,127 [INFO] Running job "Health check banco de dados (trigger: cron[hour='*/6', minute='0'], next run at: 2026-10-05 06:00:00 UTC)" (scheduled at 2026-10-05 00:00:00+00:00)
+2026-10-05 00:00:00,663 [INFO] [Health Check] OK — 30 CPUs ativas no banco.
+2026-10-05 00:00:00,667 [INFO] Job "Health check banco de dados (trigger: cron[hour='*/6', minute='0'], next run at: 2026-10-05 06:00:00 UTC)" executed successfully

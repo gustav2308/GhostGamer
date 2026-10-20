@@ -1,0 +1,6 @@
+# O Agent em si (agent.py + hardware.py) usa SOMENTE a biblioteca padrão
+# do Python (http.server, subprocess, json, pathlib) -- nenhuma dependência
+# externa é necessária para RODAR o Agent com `python agent.py`.
+#
+# O único pacote listado aqui é usado para GERAR o executável (.exe),
+# não para executar o Agent:

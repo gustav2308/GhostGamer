@@ -1,0 +1,36 @@
+.biblioteca-page { padding: 40px 0 60px; }
+
+.titulo-biblioteca { margin-bottom: 30px; }
+.titulo-biblioteca h1 { font-size: 30px; margin-bottom: 6px; }
+.titulo-biblioteca p { color: var(--text-2); font-size: 15px; }
+
+.recentes { margin-bottom: 36px; }
+.recentes h2 { font-size: 18px; margin-bottom: 14px; }
+
+.card-recente {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    transition: 0.2s;
+    max-width: 520px;
+}
+.card-recente:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); }
+.card-recente-thumb {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-3) center/cover no-repeat;
+    flex-shrink: 0;
+}
+.card-recente strong { display: block; font-size: 15px; }
+.card-recente span { font-size: 12.5px; color: var(--text-2); }
+.card-recente-acao { margin-left: auto; color: var(--accent-2); }
+
+.titulo-jogos { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+.titulo-jogos h2 { font-size: 20px; }
+.contador-jogos { font-size: 13px; color: var(--text-2); }
+
+.biblioteca-vazia { grid-column: 1 / -1; text-align: center; padding: 44px 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; }

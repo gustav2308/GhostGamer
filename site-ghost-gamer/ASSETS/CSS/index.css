@@ -1,0 +1,49 @@
+.secao:first-of-type { margin-top: 48px; }
+
+/* =========================== HERO (jogo em destaque) =========================== */
+.hero { position: relative; overflow: hidden; padding: 54px 0 50px; }
+.hero-fundo { position: absolute; inset: 0; z-index: -1; }
+.hero-fundo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(1.05); }
+.hero-fundo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+        linear-gradient(90deg, rgba(8,7,13,0.97) 15%, rgba(8,7,13,0.55) 65%, rgba(8,7,13,0.3) 100%),
+        linear-gradient(0deg, rgba(8,7,13,1) 0%, transparent 45%);
+}
+.hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -2; background: var(--gg-capa-fundo);
+}
+
+.hero-conteudo { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.hero-texto { max-width: 640px; }
+.hero-texto .badge { margin-bottom: 14px; }
+.hero-texto h1 { font-size: clamp(30px, 4.4vw, 48px); margin-bottom: 14px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.hero-desc { color: var(--text-1); font-size: 15.5px; line-height: 1.7; margin-bottom: 26px; max-width: 56ch; }
+.hero-acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.hero-capa {
+    flex-shrink: 0; width: 250px; aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--gg-capa-fundo);
+    border: 1px solid var(--gg-borda-forte);
+    box-shadow: var(--gg-sombra);
+    transition: transform 0.25s;
+}
+.hero-capa:hover { transform: translateY(-4px); }
+.hero-capa img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-simples { padding: 70px 0; text-align: center; }
+.hero-simples .hero-conteudo { justify-content: center; }
+.hero-simples h2 { font-size: 18px; color: var(--text-1); font-weight: 600; }
+.hero-simples h1 { font-size: clamp(28px, 5vw, 42px); margin: 6px 0 10px; }
+
+@media (max-width: 860px) {
+    .hero-conteudo { flex-direction: column-reverse; text-align: center; }
+    .hero-texto { max-width: 100%; }
+    .hero-meta, .hero-acoes { justify-content: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-capa { width: 190px; }
+}

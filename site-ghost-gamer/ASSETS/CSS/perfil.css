@@ -1,0 +1,98 @@
+.perfil-page { padding: 40px 0 60px; }
+
+.perfil-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+.perfil-header-info { display: flex; align-items: center; gap: 20px; }
+
+.perfil-avatar {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+}
+.perfil-avatar--iniciais {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-grad);
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.perfil-subtitulo { color: var(--text-1); font-size: 14px; margin: 4px 0 6px; }
+.perfil-header h1 { font-size: 26px; margin: 6px 0 2px; }
+.status { display: flex; align-items: center; gap: 6px; color: var(--success); font-size: 13px; font-weight: 600; }
+
+.perfil-content { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+
+.activity-header h3 { margin-bottom: 14px; font-size: 19px; }
+
+.activity-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+}
+.activity-card:hover { border-color: var(--accent); }
+.game-thumb {
+    width: 64px; height: 64px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-3) center/cover no-repeat;
+    flex-shrink: 0;
+}
+.activity-info { flex: 1; min-width: 0; }
+.activity-info h4 { font-size: 15.5px; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.activity-genero { font-size: 12.5px; color: var(--text-2); }
+
+.perfil-vazio { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+
+.profile-side { display: flex; flex-direction: column; gap: 14px; }
+.side-box {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.side-box p { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-1); }
+.side-box p .icone { color: var(--accent); }
+.side-box span { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+
+/* ---------- Modal de edição ---------- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 5, 10, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 1500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-overlay.ativo { display: flex; }
+.modal-box { width: 100%; max-width: 440px; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.modal-header h3 { font-size: 20px; }
+.modal-fechar { background: none; border: none; color: var(--text-1); font-size: 18px; cursor: pointer; }
+.modal-fechar:hover { color: var(--text-0); }
+
+.modal-avatar-picker { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 22px; }
+.modal-avatar-picker .perfil-avatar { width: 96px; height: 96px; }
+
+@media (max-width: 900px) {
+    .perfil-content { grid-template-columns: 1fr; }
+}

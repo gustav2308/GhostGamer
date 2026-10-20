@@ -1,0 +1,3 @@
+# Ninguém baixa daqui direto -- só através de XAMP/baixarJogo.php
+# (assim dá pra contar downloads e, no futuro, exigir login/biblioteca).
+Require all denied

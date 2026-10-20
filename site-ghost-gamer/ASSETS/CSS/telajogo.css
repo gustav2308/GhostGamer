@@ -1,0 +1,110 @@
+.container-jogo { max-width: 1180px; margin: 0 auto; padding: 40px 24px 60px; }
+
+.topo-jogo { display: grid; grid-template-columns: 300px 1fr; gap: 34px; margin-bottom: 44px; }
+.imagem-jogo {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    background: var(--gg-capa-fundo) center/cover no-repeat;
+    border: 1px solid var(--border);
+    box-shadow: var(--gg-sombra);
+}
+
+.informacoes-jogo { display: flex; flex-direction: column; justify-content: center; }
+.informacoes-jogo .badge { align-self: flex-start; margin-bottom: 12px; }
+.informacoes-jogo h1 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+.empresa-jogo { color: var(--text-1); font-size: 14px; margin-bottom: 20px; }
+.acoes-jogo { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+
+.meio-jogo { display: grid; grid-template-columns: 1.4fr 1fr; gap: 26px; margin-bottom: 46px; align-items: start; }
+.descricao-jogo h2 { font-size: 20px; margin-bottom: 12px; }
+.descricao-jogo p { color: var(--text-1); font-size: 15px; line-height: 1.75; margin-bottom: 10px; }
+
+/* ---------- Verificador de compatibilidade ---------- */
+.compat-box h3 { display: flex; align-items: center; gap: 8px; font-size: 17px; margin-bottom: 8px; }
+.compat-box h3 .icone { color: var(--accent); }
+.compat-intro { color: var(--text-1); font-size: 13.5px; margin-bottom: 18px; }
+
+.compat-link-avancado {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12.5px; color: var(--accent-2); margin: -8px 0 16px;
+}
+.compat-link-avancado:hover { text-decoration: underline; }
+
+.resultado-compat { display: none; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+.resultado-compat.ativo { display: block; }
+
+/* ---------- Verificação automática (Ghost Gamer Hardware Agent) ---------- */
+.agente-intro { margin-bottom: 12px; }
+.agente-intro h4 { font-size: 15px; margin-bottom: 4px; }
+.agente-intro p { font-size: 13.5px; color: var(--text-1); line-height: 1.5; }
+
+.agente-acoes { display: flex; flex-direction: column; gap: 10px; }
+
+.status-agente { font-size: 13.5px; line-height: 1.6; margin-top: 10px; }
+.status-agente:empty { display: none; margin: 0; }
+.status-agente.info { color: var(--text-1); }
+.status-agente.aviso { color: var(--gg-aviso); }
+.status-agente.erro { color: var(--danger); }
+.status-agente code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1px 6px;
+}
+.status-agente a { color: var(--accent-2); text-decoration: underline; }
+
+.compat-separador {
+    display: flex; align-items: center; gap: 10px;
+    margin: 18px 0; color: var(--text-2); font-size: 12.5px;
+}
+.compat-separador::before, .compat-separador::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+.resultado-agente { display: none; margin-top: 4px; padding-top: 18px; border-top: 1px solid var(--border); }
+.resultado-agente.ativo { display: block; }
+.agente-resumo { color: var(--text-1); font-size: 14px; margin-bottom: 16px; }
+
+.veredito-compat { font-size: 14px; font-weight: 700; padding: 11px 14px; border-radius: var(--radius-sm); margin-bottom: 16px; }
+.veredito-compat.ok { background: rgba(52, 211, 153, 0.12); color: var(--success); }
+.veredito-compat.minimo { background: rgba(251, 191, 36, 0.12); color: var(--gg-aviso); }
+.veredito-compat.insuficiente { background: rgba(248, 113, 113, 0.12); color: var(--danger); }
+
+.linha-compat { margin-bottom: 14px; }
+.linha-compat-topo { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; color: var(--text-1); }
+.barra-compat { height: 6px; border-radius: 4px; background: var(--bg-3); overflow: hidden; }
+.barra-compat-preenchida { height: 100%; background: var(--accent-grad); border-radius: 4px; transition: width 0.4s ease; }
+.linha-compat-status { font-size: 12px; color: var(--text-2); }
+.linha-compat.insuficiente .barra-compat-preenchida { background: var(--danger); }
+.linha-compat.insuficiente .linha-compat-status { color: var(--danger); }
+.linha-compat.minimo .barra-compat-preenchida { background: var(--gg-aviso); }
+.linha-compat.minimo .linha-compat-status { color: var(--gg-aviso); }
+.linha-compat.otimo .barra-compat-preenchida { background: var(--success); }
+
+.compat-aviso {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-top: 18px; padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: var(--text-1);
+    font-size: 12.5px; line-height: 1.6;
+}
+.compat-aviso .icone { color: var(--gg-aviso); flex-shrink: 0; margin-top: 1px; }
+
+/* ---------- Requisitos ---------- */
+.requisitos-jogo h2 { font-size: 20px; margin-bottom: 18px; }
+.requisitos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.requisito {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+}
+.requisito strong { display: block; font-size: 13px; color: var(--text-2); margin-bottom: 6px; }
+.requisito span { font-size: 16px; font-weight: 600; }
+
+@media (max-width: 900px) {
+    .topo-jogo, .meio-jogo { grid-template-columns: 1fr; }
+    .imagem-jogo { max-width: 260px; }
+}

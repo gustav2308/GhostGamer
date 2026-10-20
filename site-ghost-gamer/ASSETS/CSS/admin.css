@@ -1,0 +1,60 @@
+.admin-page { padding: 36px 0 60px; }
+.admin-page h1 { font-size: 27px; margin-bottom: 22px; }
+
+.admin-abas { display: flex; gap: 6px; margin-bottom: 22px; border-bottom: 1px solid var(--border); }
+.admin-abas a {
+    padding: 10px 18px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-1);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.admin-abas a:hover { color: var(--text-0); }
+.admin-abas a.ativo { color: var(--accent-2); border-color: var(--accent); }
+
+.admin-busca { display: flex; gap: 10px; max-width: 420px; margin-bottom: 14px; }
+.admin-busca input {
+    flex: 1;
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-1);
+    color: var(--text-0);
+    font: 500 15px var(--font-body);
+}
+.admin-busca input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(171, 88, 188, 0.22); }
+.admin-pdf-form { margin-bottom: 26px; }
+
+.admin-tabela-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-1); }
+.admin-tabela { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-tabela th {
+    text-align: left;
+    padding: 13px 16px;
+    background: var(--bg-2);
+    color: var(--text-1);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+}
+.admin-tabela td { padding: 13px 16px; border-top: 1px solid var(--border); }
+.admin-tabela tr:hover td { background: rgba(171, 88, 188, 0.06); }
+.admin-vazio { text-align: center; color: var(--text-2); padding: 32px !important; }
+
+.admin-acoes { display: flex; align-items: center; gap: 12px; }
+.admin-acoes a { color: var(--text-1); display: flex; transition: color 0.2s; }
+.admin-acoes a:hover { color: var(--accent-2); }
+.admin-acoes form { display: inline-flex; margin: 0; }
+.admin-btn-excluir { background: none; border: none; color: var(--text-1); cursor: pointer; display: flex; padding: 0; transition: color 0.2s; }
+.admin-btn-excluir:hover { color: var(--danger); }
+
+.admin-form { max-width: 640px; }
+.admin-form-grid { max-width: 920px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 22px; }
+.admin-form-grid-full { grid-column: 1 / -1; }
+.admin-form-acoes { display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; }
+
+@media (max-width: 700px) {
+    .admin-form-grid { grid-template-columns: 1fr; }
+}

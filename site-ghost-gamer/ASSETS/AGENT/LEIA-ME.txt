@@ -1,0 +1,18 @@
+Coloque aqui o arquivo:
+
+    GhostGamerAgent.exe
+
+gerado pelo build.bat da pasta ghost-gamer-hardware-agent/ (na raiz do
+projeto, fora de site-ghost-gamer/).
+
+O botão "Baixar Ghost Gamer Agent" em PAGINAS/telaJogo.php aponta
+diretamente para:
+
+    ASSETS/AGENT/GhostGamerAgent.exe
+
+Esta pasta é servida diretamente pelo Apache/XAMPP (sem .htaccess
+bloqueando, ao contrário de ASSETS/DOWNLOADS/, que é só para os
+arquivos dos jogos) -- é só colocar o .exe aqui que o link já funciona.
+
+Passo a passo para gerar o .exe: veja ghost-gamer-hardware-agent/README.md
+(seção "2. Gerando o executável").

@@ -1,0 +1,63 @@
+.auth-page {
+    min-height: calc(100vh - var(--topbar-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+}
+
+.auth-box { width: 100%; max-width: 440px; text-align: center; }
+
+.auth-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-bottom: 22px; }
+.auth-logo img { width: 46px; height: 46px; filter: drop-shadow(0 0 10px rgba(171, 88, 188, 0.55)); }
+.auth-logo span {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--text-0);
+}
+
+.auth-box h2 { font-size: 24px; margin-bottom: 6px; }
+.auth-subtitulo { color: var(--text-2); font-size: 14.5px; margin-bottom: 24px; }
+.auth-box form { text-align: left; }
+
+.campo-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: -6px 0 20px;
+    font-size: 14px;
+    color: var(--text-1);
+    cursor: pointer;
+}
+.campo-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--gg-roxo-btn);
+    cursor: pointer;
+}
+.campo-checkbox:hover { color: var(--text-0); }
+
+/* Abas Entrar / Cadastrar (navegação entre as duas páginas) */
+.auth-tabs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+    padding: 4px; margin-bottom: 26px;
+    background: var(--bg-2); border-radius: 14px;
+}
+.auth-tabs a {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 42px; border-radius: 10px;
+    font-weight: 700; font-size: 15px; color: var(--text-1);
+    transition: color 0.2s, background 0.2s;
+}
+.auth-tabs a:hover { color: var(--text-0); }
+.auth-tabs a.ativo { color: #fff; background: var(--accent-grad); }
+
+.auth-link-secundario { display: block; text-align: center; font-size: 14px; color: var(--text-1); margin: 16px 0 4px; }
+.auth-link-secundario:hover { color: var(--accent-2); }
+
+.auth-rodape { text-align: center; font-size: 14.5px; color: var(--text-1); margin-top: 18px; }
+.auth-rodape a { color: var(--accent-2); font-weight: 600; }
+.auth-rodape a:hover { text-decoration: underline; }
