@@ -1,6 +1,8 @@
 
 FROM php:8.2-apache
 
+RUN ls -l /etc/apache2/mods-enabled/mpm*
+
 RUN docker-php-ext-install mysqli pdo_mysql \
     && a2enmod rewrite \
     && apache2ctl -t
