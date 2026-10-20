@@ -1,11 +1,10 @@
 
 FROM php:8.2-apache
 
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
-    && a2enmod mpm_prefork \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && a2enmod rewrite \
-    && apache2ctl -M
+RUN a2dismod mpm_event mpm_worker || true
+RUN a2enmod mpm_prefork
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
