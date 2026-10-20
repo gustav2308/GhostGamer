@@ -1,9 +1,11 @@
 
 FROM php:8.2-apache
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
-RUN a2enmod rewrite
+RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod mpm_prefork \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && a2enmod rewrite \
+    && apache2ctl -M
 
 WORKDIR /var/www/html
 
