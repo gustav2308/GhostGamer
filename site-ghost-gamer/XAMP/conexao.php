@@ -11,10 +11,10 @@
  * servidor de produção, etc).
  */
 
-const DB_HOST = "localhost";
+const DB_HOST = "mysql.railway.internal";
 const DB_NOME = "ghost_gamer";
 const DB_USUARIO = "root";
-const DB_SENHA = "";
+const DB_SENHA = "ZEemhcQhdvYTRtOZXZyYUsJejVgcyFBg";
 const DB_CHARSET = "utf8mb4";
 
 function conectarBanco(): PDO
