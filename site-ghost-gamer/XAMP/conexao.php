@@ -25,21 +25,24 @@ function conectarBanco(): PDO
         return $pdo;
     }
 
-    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NOME . ";charset=" . DB_CHARSET;
+    $porta = "3306";
+
+    $dsn = "mysql:host=" . DB_HOST .
+           ";port=" . $porta .
+           ";dbname=" . DB_NOME .
+           ";charset=" . DB_CHARSET;
 
     try {
         $pdo = new PDO($dsn, DB_USUARIO, DB_SENHA, [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
-            // Reaproveita a conexão TCP entre requisições (evita o
-            // handshake do MySQL a cada acesso) -> login e consultas
-            // respondem mais rápido sob carga.
             PDO::ATTR_PERSISTENT         => true,
         ]);
     } catch (PDOException $e) {
+        error_log("Erro de conexão MySQL: " . $e->getMessage());
         http_response_code(500);
-        die("Não foi possível conectar ao banco de dados. Verifique se o MySQL está rodando e se o banco 'ghost_gamer' existe.");
+        die("Não foi possível conectar ao banco de dados.");
     }
 
     return $pdo;
