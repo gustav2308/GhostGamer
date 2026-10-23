@@ -34,6 +34,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 load_dotenv()
+
+for nome in ["DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD"]:
+    valor = os.getenv(nome)
+    if nome == "DB_PASSWORD":
+        print(f"[CONFIG] {nome}: {'CONFIGURADA' if valor else 'AUSENTE'}")
+    else:
+        print(f"[CONFIG] {nome}: {valor if valor else 'AUSENTE'}")
 log = logging.getLogger("API")
 
 # ─────────────────────────────────────────
