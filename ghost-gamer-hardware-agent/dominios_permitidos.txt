@@ -1,0 +1,3 @@
+ http://localhost e http://127.0.0.1 
+
+https://ghostgamer-production.up.railway.app
