@@ -13,7 +13,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- ================================================================
 CREATE TABLE fabricantes (
     id          SERIAL PRIMARY KEY,
-    nome        VARCHAR(50)  NOT NULL UNIQUE,   -- Intel, AMD, NVIDIA, Corsair...
+    nome        VARCHAR(50)  NOT NULL,   -- Intel, AMD, NVIDIA, Corsair...
     tipo        VARCHAR(20)  NOT NULL,           -- cpu | gpu | ram | storage | mb
     site        VARCHAR(200),
     criado_em   TIMESTAMP DEFAULT NOW()
