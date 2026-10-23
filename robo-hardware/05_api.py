@@ -428,6 +428,158 @@ def listar_apps(categoria: Optional[str] = Query(None, example="Game")):
         put_conn(conn)
 
 
+@app.post("/apps/sincronizar", tags=["Catálogo"])
+def sincronizar_app(dados: dict):
+    """
+    Recebe um jogo cadastrado no Ghost Gamer e o insere
+    ou atualiza no catálogo de compatibilidade.
+    """
+    titulo = str(dados.get("titulo") or "").strip()
+
+    if not titulo:
+        raise HTTPException(
+            status_code=400,
+            detail="O título do jogo é obrigatório."
+        )
+
+    # Converte os valores recebidos do PHP.
+    def numero(campo, tipo):
+        valor = dados.get(campo)
+
+        if valor is None or valor == "":
+            return None
+
+        try:
+            return tipo(valor)
+        except (ValueError, TypeError):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Valor inválido para o campo '{campo}'."
+            )
+
+    genero = dados.get("genero") or "Jogo"
+    empresa_email = dados.get("empresa_email")
+
+    nucleos = numero("nucleos", int)
+    frequencia = numero("frequencia", float)
+    ram_gb = numero("ram_gb", int)
+    vram_gb = numero("vram_gb", int)
+    armazenamento = numero("armazenamento", int)
+
+    if any(
+        valor is not None and valor < 0
+        for valor in [
+            nucleos, frequencia, ram_gb, vram_gb, armazenamento
+        ]
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="Os requisitos não podem ser negativos."
+        )
+
+    conn = get_conn()
+
+    try:
+        with conn.cursor() as cur:
+            # Procura um jogo com o mesmo nome para evitar duplicatas.
+            cur.execute(
+                """
+                SELECT id
+                FROM aplicativos
+                WHERE LOWER(nome) = LOWER(%s)
+                LIMIT 1
+                """,
+                (titulo,)
+            )
+
+            existente = cur.fetchone()
+
+            if existente:
+                # Atualiza o jogo já cadastrado.
+                cur.execute(
+                    """
+                    UPDATE aplicativos
+                    SET categoria = %s,
+                        desenvolvedor = %s,
+                        req_min_cpu_nucleos = %s,
+                        req_min_cpu_ghz = %s,
+                        req_min_ram_gb = %s,
+                        req_min_gpu_vram_gb = %s,
+                        req_min_storage_gb = %s,
+                        ativo = TRUE
+                    WHERE id = %s
+                    """,
+                    (
+                        genero,
+                        empresa_email,
+                        nucleos,
+                        frequencia,
+                        ram_gb,
+                        vram_gb,
+                        armazenamento,
+                        existente["id"]
+                    )
+                )
+
+                acao = "atualizado"
+
+            else:
+                # Insere o jogo novo no catálogo.
+                cur.execute(
+                    """
+                    INSERT INTO aplicativos (
+                        nome,
+                        categoria,
+                        desenvolvedor,
+                        req_min_cpu_nucleos,
+                        req_min_cpu_ghz,
+                        req_min_ram_gb,
+                        req_min_gpu_vram_gb,
+                        req_min_storage_gb,
+                        ativo
+                    )
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, TRUE)
+                    """,
+                    (
+                        titulo,
+                        genero,
+                        empresa_email,
+                        nucleos,
+                        frequencia,
+                        ram_gb,
+                        vram_gb,
+                        armazenamento
+                    )
+                )
+
+                acao = "cadastrado"
+
+        conn.commit()
+
+        return {
+            "sucesso": True,
+            "mensagem": f"Jogo {acao} com sucesso.",
+            "titulo": titulo,
+            "acao": acao
+        }
+
+    except HTTPException:
+        conn.rollback()
+        raise
+
+    except Exception:
+        conn.rollback()
+        log.exception("Erro ao sincronizar jogo: %s", titulo)
+
+        raise HTTPException(
+            status_code=500,
+            detail="Erro interno ao sincronizar o jogo."
+        )
+
+    finally:
+        put_conn(conn)
+
+
 @app.get("/cpus", tags=["Catálogo"])
 def listar_cpus(
     fabricante: Optional[str] = Query(None, example="Intel"),

@@ -34,13 +34,13 @@ define("HARDWARE_PAINEL_URL", "");
  * Antes de publicar o site, troque o valor abaixo pelo endereço real
  * (público, com HTTPS) de onde a API robo-hardware/05_api.py estiver
  * hospedada, por exemplo:
- *   define("HARDWARE_API_URL", "https://api-hardware.seudominio.com.br");
+ *   define("HARDWARE_API_URL", "https://robo-hardware-production.up.railway.app");
  *
  * Este projeto não assume nem inventa esse domínio -- ver o README de
  * entrega (seção "Hospedagem da API") para as opções de onde hospedar
  * uma API FastAPI + PostgreSQL e o que precisa ser publicado.
  */
-define("HARDWARE_API_URL", "http://localhost:8000");
+define("HARDWARE_API_URL", "https://robo-hardware-production.up.railway.app");
 
 /**
  * URL do Ghost Gamer Hardware Agent -- programa separado que roda no
