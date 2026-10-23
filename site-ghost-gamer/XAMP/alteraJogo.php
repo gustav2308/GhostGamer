@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . "/../PAGINAS/parciais/bootstrap.php";
 require_once __DIR__ . "/csrf.php";
 require_once __DIR__ . "/sincronizarRobo.php";
@@ -268,7 +269,10 @@ if (!$jogo) {
     </form>
 </main>
 
-<?php include __DIR__ . "/../PAGINAS/parciais/footer.php"; ?>
+<?php include __DIR__ . "/../PAGINAS/parciais/footer.php"; 
+header("Location: ../PAGINAS/...");
+exit;
+?>
 
 </body>
 </html>

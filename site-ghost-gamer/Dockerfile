@@ -11,6 +11,8 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
