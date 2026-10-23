@@ -91,7 +91,10 @@ def _carregar_dominios_adicionais() -> set[str]:
     return dominios
 
 
+DOMINIO_SITE = "https://ghostgamer-production.up.railway.app"
+
 DOMINIOS_ADICIONAIS_PERMITIDOS = _carregar_dominios_adicionais()
+DOMINIOS_ADICIONAIS_PERMITIDOS.add(DOMINIO_SITE)
 
 
 def _origem_permitida(origem: str | None) -> bool:
