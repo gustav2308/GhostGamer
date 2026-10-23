@@ -69,38 +69,22 @@ app.add_middleware(
 _pool: "psycopg2.pool.ThreadedConnectionPool | None" = None
 
 
-
 def _criar_pool() -> "psycopg2.pool.ThreadedConnectionPool":
-    host = os.getenv("PGHOST") or os.getenv("DB_HOST")
-    porta = os.getenv("PGPORT") or os.getenv("DB_PORT", "5432")
-    banco = os.getenv("PGDATABASE") or os.getenv("DB_NAME")
-    usuario = os.getenv("PGUSER") or os.getenv("DB_USER")
-    senha = os.getenv("PGPASSWORD") or os.getenv("DB_PASSWORD")
-
-    if not all([host, banco, usuario, senha]):
-        raise RuntimeError(
-            "Configuração do PostgreSQL incompleta. "
-            "Verifique PGHOST, PGDATABASE, PGUSER e PGPASSWORD."
-        )
-
-    print(f"[DB] Host: {host}")
-    print(f"[DB] Porta: {porta}")
-    print(f"[DB] Banco: {banco}")
-    print(f"[DB] Usuário: {usuario}")
-
     return psycopg2.pool.ThreadedConnectionPool(
-        minconn=int(os.getenv("DB_POOL_MIN", "2")),
-        maxconn=int(os.getenv("DB_POOL_MAX", "20")),
-        host=host,
-        port=int(porta),
-        dbname=banco,
-        user=usuario,
-        password=senha,
+        minconn=2,
+        maxconn=20,
+
+        # Copie os valores reais da aba Variables do Postgres
+        host="postgres.railway.internal",
+        port=5432,
+        dbname="railway",
+        user="postgres",
+        password="MiUBdwVtwUTidiycunZXSiRPQnxOAXyT",
+
         cursor_factory=psycopg2.extras.RealDictCursor,
         connect_timeout=10,
         sslmode="require",
     )
-
 
 
 def get_conn():
