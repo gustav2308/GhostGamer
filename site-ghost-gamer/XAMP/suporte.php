@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Recebe o formulário de Suporte via AJAX
