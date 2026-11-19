@@ -14,9 +14,22 @@ require_once __DIR__ . "/../PAGINAS/parciais/bootstrap.php";
 $base = "../";
 
 $pdo = conectarBanco();
-$totalAdmins = (int) $pdo->query("SELECT COUNT(*) FROM clientes WHERE administrador = 'admin'")->fetchColumn();
 
-$podeAcessar = ($logado && $tipo === "admin") || $totalAdmins === 0;
+$totalAdmins = (int) $pdo->query(
+    "SELECT COUNT(*) FROM clientes WHERE administrador = 'admin'"
+)->fetchColumn();
+
+echo "<pre>";
+
+var_dump([
+    "logado" => $logado,
+    "tipo" => $tipo,
+    "totalAdmins" => $totalAdmins
+]);
+
+echo "</pre>";
+
+exit;
 
 if (!$podeAcessar) {
     header("Location: ../PAGINAS/loginCliente.php");
