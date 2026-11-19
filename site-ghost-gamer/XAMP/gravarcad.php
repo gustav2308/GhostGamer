@@ -216,86 +216,75 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
         $caminhoBanco = "ASSETS/IMG/" . $nomeFoto;
     }
 
-    // -------- Arquivo do jogo (.zip ou .exe) para download --------
 
-    $arquivoCaminhoBanco = null;
-    $arquivoNomeOriginal = null;
-    $arquivoTamanho      = null;
+    
+// -------- Arquivo do jogo (.zip ou .exe) opcional --------
 
-    $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
+        $arquivoCaminhoBanco = null;
+        $arquivoNomeOriginal = null;
+        $arquivoTamanho = null;
 
-    if (
-        $erroUpload === UPLOAD_ERR_INI_SIZE ||
-        $erroUpload === UPLOAD_ERR_FORM_SIZE
-    ) {
-        falhar(
-            "O arquivo é maior do que o limite configurado no servidor (upload_max_filesize = "
-            . ini_get("upload_max_filesize")
-            . ", post_max_size = "
-            . ini_get("post_max_size")
-            . "). Aumente esses valores no php.ini e reinicie o Apache -- veja o LEIA-ME.",
-            $ehAjax,
-            "../PAGINAS/cadastroJogos.php"
-        );
-    }
+        $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
 
-    if ($erroUpload !== UPLOAD_ERR_OK) {
-        falhar(
-            "Envie o arquivo do jogo (.zip ou .exe).",
-            $ehAjax,
-            "../PAGINAS/cadastroJogos.php"
-        );
-    }
+        // Só processa se um arquivo foi selecionado
+        if ($erroUpload !== UPLOAD_ERR_NO_FILE) {
 
-    $arquivo = $_FILES["arquivo_jogo"];
+            if ($erroUpload !== UPLOAD_ERR_OK) {
+                falhar(
+                    "Ocorreu um erro ao enviar o arquivo do jogo.",
+                    $ehAjax,
+                    "../PAGINAS/cadastroJogos.php"
+                );
+            }
 
-    $extensaoArquivo = strtolower(
-        pathinfo($arquivo["name"], PATHINFO_EXTENSION)
-    );
+            $arquivo = $_FILES["arquivo_jogo"];
 
-    if (!in_array($extensaoArquivo, ["zip", "exe"], true)) {
-        falhar(
-            "O arquivo do jogo precisa ser .zip ou .exe.",
-            $ehAjax,
-            "../PAGINAS/cadastroJogos.php"
-        );
-    }
+            $extensaoArquivo = strtolower(
+                pathinfo($arquivo["name"], PATHINFO_EXTENSION)
+            );
 
-    $nomeJogoArquivo = preg_replace(
-        "/[^a-zA-Z0-9]/",
-        "_",
-        $titulo
-    );
+            if (!in_array($extensaoArquivo, ["zip", "exe"], true)) {
+                falhar(
+                    "O arquivo do jogo precisa ser .zip ou .exe.",
+                    $ehAjax,
+                    "../PAGINAS/cadastroJogos.php"
+                );
+            }
 
-    $nomeArquivoFinal =
-        $nomeJogoArquivo . "_" . uniqid() . "." . $extensaoArquivo;
+            $nomeJogoArquivo = preg_replace(
+                "/[^a-zA-Z0-9]/",
+                "_",
+                $titulo
+            );
 
-    $pastaDownloads =
-        dirname(__DIR__) . "/ASSETS/DOWNLOADS/";
+            $nomeArquivoFinal =
+                $nomeJogoArquivo . "_" . uniqid() . "." . $extensaoArquivo;
 
-    if (!is_dir($pastaDownloads)) {
-        mkdir($pastaDownloads, 0755, true);
-    }
+            $pastaDownloads = dirname(__DIR__) . "/ASSETS/DOWNLOADS/";
 
-    if (!move_uploaded_file(
-        $arquivo["tmp_name"],
-        $pastaDownloads . $nomeArquivoFinal
-    )) {
-        falhar(
-            "Não foi possível salvar o arquivo do jogo no servidor (verifique espaço em disco e permissões da pasta ASSETS/DOWNLOADS).",
-            $ehAjax,
-            "../PAGINAS/cadastroJogos.php"
-        );
-    }
+            if (!is_dir($pastaDownloads)) {
+                mkdir($pastaDownloads, 0755, true);
+            }
 
-    $arquivoCaminhoBanco =
-        "ASSETS/DOWNLOADS/" . $nomeArquivoFinal;
+            if (!move_uploaded_file(
+                $arquivo["tmp_name"],
+                $pastaDownloads . $nomeArquivoFinal
+            )) {
+                falhar(
+                    "Não foi possível salvar o arquivo do jogo.",
+                    $ehAjax,
+                    "../PAGINAS/cadastroJogos.php"
+                );
+            }
 
-    $arquivoNomeOriginal =
-        $arquivo["name"];
+            $arquivoCaminhoBanco =
+                "ASSETS/DOWNLOADS/" . $nomeArquivoFinal;
 
-    $arquivoTamanho =
-        filesize($pastaDownloads . $nomeArquivoFinal);
+            $arquivoNomeOriginal = $arquivo["name"];
+
+            $arquivoTamanho =
+                filesize($pastaDownloads . $nomeArquivoFinal);
+}
 
     // -------- Salva o jogo no banco --------
 
