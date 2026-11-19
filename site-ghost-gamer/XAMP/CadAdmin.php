@@ -15,7 +15,7 @@ $base = "../";
 
 $pdo = conectarBanco();
 
-$podeAcessar = ($logado && $tipo === "admin") || $totalAdmins === 0;
+$podeAcessar = ($logado && $tipo === "admin");
 
 
 if (!$podeAcessar) {
