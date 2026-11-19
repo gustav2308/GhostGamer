@@ -225,6 +225,11 @@ if (!$jogo) {
             <input type="number" name="armazenamento" value="<?= (int) $jogo["armazenamento"] ?>" min="0">
         </div>
 
+        <div class="field">
+            <label>Imagem de capa</label>
+            <input type="file" name="foto" accept="image/png, image/jpeg, image/webp">
+        </div>
+
         <div class="field admin-form-grid-full">
             <label>Arquivo do jogo (.zip ou .exe)</label>
 
