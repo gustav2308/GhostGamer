@@ -171,6 +171,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
             ram_gb=:ram_gb,
             vram_gb=:vram_gb,
             armazenamento=:armazenamento
+            $camposExtras
             WHERE id_jogo=:id"
         );
 
