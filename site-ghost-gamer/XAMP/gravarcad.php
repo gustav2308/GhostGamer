@@ -115,14 +115,7 @@ if (str_contains($paginaAnterior, "cadastroEmpresa.php")) {
         'CNPJ',
         'data_abertura',
         'telefone',
-        'email',
-        'Rua',
-        'numero',
-        'bairro',
-        'cidade',
-        'estado',
-        'cep',
-        'pais'
+        'email'
     ];
 
     $valores = [];
@@ -133,9 +126,9 @@ if (str_contains($paginaAnterior, "cadastroEmpresa.php")) {
 
     $insere = $pdo->prepare(
         "INSERT INTO empresa
-            (razao_social, nome_fantasia, CNPJ, data_abertura, telefone, email, Rua, numero, bairro, cidade, estado, cep, pais)
+            (razao_social, nome_fantasia, CNPJ, data_abertura, telefone, email)
          VALUES
-            (:razao_social, :nome_fantasia, :CNPJ, :data_abertura, :telefone, :email, :Rua, :numero, :bairro, :cidade, :estado, :cep, :pais)"
+            (:razao_social, :nome_fantasia, :CNPJ, :data_abertura, :telefone, :email)"
     );
 
     $insere->execute($valores);
