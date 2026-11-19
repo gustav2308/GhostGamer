@@ -134,7 +134,7 @@ if ($aba === "clientes") {
             <div class="admin-tabela-wrap">
                 <table class="admin-tabela">
                     <thead>
-                        <tr><th>ID</th><th>Razão social</th><th>CNPJ</th><th>Cidade</th><th>Ações</th></tr>
+                        <tr><th>ID</th><th>Razão social</th><th>CNPJ</th><th>Email</th><th>Ações</th></tr>
                     </thead>
                     <tbody>
                         <?php if (empty($empresas)): ?>
