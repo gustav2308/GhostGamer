@@ -35,8 +35,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erro = "O título do jogo é obrigatório.";
     }
 
-    $camposExtras = "";
-    $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
+$camposExtras = "";
+
+// -------- IMAGEM DE CAPA --------
+
+$erroFoto = $_FILES["foto"]["error"] ?? UPLOAD_ERR_NO_FILE;
+
+if (!$erro && $erroFoto === UPLOAD_ERR_OK) {
+
+    $foto = $_FILES["foto"];
+
+    $extensaoFoto = strtolower(
+        pathinfo($foto["name"], PATHINFO_EXTENSION)
+    );
+
+    if (!in_array($extensaoFoto, ["jpg", "jpeg", "png", "webp"], true)) {
+        $erro = "A imagem precisa ser JPG, JPEG, PNG ou WEBP.";
+    } else {
+
+        $pastaImagens = dirname(__DIR__) . "/ASSETS/IMG/";
+
+        if (!is_dir($pastaImagens)) {
+            mkdir($pastaImagens, 0755, true);
+        }
+
+        $nomeFoto = "jogo_" . $id . "_" . uniqid() . "." . $extensaoFoto;
+        $caminhoFoto = $pastaImagens . $nomeFoto;
+
+        if (!move_uploaded_file($foto["tmp_name"], $caminhoFoto)) {
+            $erro = "Não foi possível salvar a nova imagem.";
+        } else {
+            $dados["foto"] = "ASSETS/IMG/" . $nomeFoto;
+            $camposExtras .= ", foto = :foto";
+        }
+    }
+}
+
+$erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
 
     if (!$erro && $erroUpload === UPLOAD_ERR_OK) {
         $arquivo = $_FILES["arquivo_jogo"];
@@ -71,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $dados["arquivo_nome_original"] = $arquivo["name"];
                     $dados["arquivo_tamanho_bytes"] = filesize($caminhoNovo);
 
-                    $camposExtras = ",
+                    $camposExtras .= ",
                         arquivo_jogo = :arquivo_jogo,
                         arquivo_nome_original = :arquivo_nome_original,
                         arquivo_tamanho_bytes = :arquivo_tamanho_bytes";
