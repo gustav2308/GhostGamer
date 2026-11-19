@@ -64,7 +64,7 @@ $generos = ["Ação", "Aventura", "RPG", "Estratégia", "Simulação", "Esportes
 
             <div class="field">
                 <label>Arquivo do jogo (.zip ou .exe)</label>
-                <input type="file" name="arquivo_jogo" accept=".zip,.exe" required>
+                <input type="file" name="arquivo_jogo" accept=".zip,.exe">
             </div>
             <div class="admin-form-acoes admin-form-grid-full">
                 <button type="submit" class="btn btn-primary">Cadastrar jogo</button>
