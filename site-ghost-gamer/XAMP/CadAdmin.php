@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="../ASSETS/CSS/auth.css">
 </head>
 <body>
+    <?php include __DIR__ . "/PAGINAS/parciais/nav.php"; ?>
 
     <main class="auth-page">
         <div class="panel auth-box">
@@ -77,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <form method="post">
                 <div class="field"><label>Nome completo</label><input type="text" name="cli_nome" required></div>
                 <div class="field"><label>E-mail</label><input type="email" name="email" required></div>
-                <div class="field"><label>Nickname</label><input type="text" name="nickname" required></div>
+                <div class="field"><label>Nome de Usuário</label><input type="text" name="nickname" required></div>
                 <div class="field"><label>Senha</label><input type="password" name="senha" minlength="6" required></div>
                 <button type="submit" class="btn btn-primary btn-block">Criar conta admin</button>
             </form>
