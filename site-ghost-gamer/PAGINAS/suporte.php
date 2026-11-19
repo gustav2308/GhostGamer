@@ -97,7 +97,6 @@ $paginaAtual = "suporte.php";
                     <select id="categoria" name="categoria">
                         <option value="Problema técnico">Problema técnico</option>
                         <option value="Conta e login">Conta e login</option>
-                        <option value="Cobrança">Cobrança</option>
                         <option value="Sugestão">Sugestão</option>
                         <option value="Outro">Outro</option>
                     </select>

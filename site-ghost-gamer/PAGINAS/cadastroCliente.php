@@ -51,7 +51,7 @@ if ($logado) {
                 </div>
 
                 <div class="field">
-                    <label for="nickname">Nickname</label>
+                    <label for="nickname">Nome de Usuário</label>
                     <input type="text" name="nickname" id="nickname" placeholder="Como quer ser chamado no launcher" required>
                 </div>
 

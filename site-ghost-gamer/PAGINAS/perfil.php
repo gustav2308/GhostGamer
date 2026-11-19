@@ -144,7 +144,7 @@ $totalJogos = count($jogosBiblioteca);
                 </div>
 
                 <div class="field">
-                    <label for="inputNickname">Nickname</label>
+                    <label for="inputNickname">Nome de Usuário</label>
                     <input type="text" id="inputNickname" name="nickname" value="<?= htmlspecialchars($cliente["nickname"]) ?>" required>
                 </div>
 
