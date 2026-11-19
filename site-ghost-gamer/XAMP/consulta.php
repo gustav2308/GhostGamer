@@ -145,7 +145,7 @@ if ($aba === "clientes") {
                                 <td><?= (int) $e["id_empresa"] ?></td>
                                 <td><?= htmlspecialchars($e["razao_social"]) ?></td>
                                 <td><?= htmlspecialchars($e["CNPJ"]) ?></td>
-                                <td><?= htmlspecialchars($e["cidade"]) ?></td>
+                                <td><?= htmlspecialchars($e["email"]) ?></td>
                                 <td class="admin-acoes">
                                     <a href="alteraEmpresa.php?id=<?= (int) $e["id_empresa"] ?>"><?= icone('editar', 16) ?></a>
                                     <form method="post" action="exclui.php" onsubmit="return confirm('Excluir esta empresa?');">
