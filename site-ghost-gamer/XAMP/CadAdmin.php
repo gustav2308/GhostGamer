@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="../ASSETS/CSS/auth.css">
 </head>
 <body>
-    <?php include __DIR__ . "/PAGINAS/parciais/nav.php"; ?>
+    <?php include __DIR__ . "/../PAGINAS/parciais/nav.php"; ?>
 
     <main class="auth-page">
         <div class="panel auth-box">
