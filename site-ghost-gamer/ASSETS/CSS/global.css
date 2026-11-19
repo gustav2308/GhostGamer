@@ -94,7 +94,6 @@ body {
         radial-gradient(900px 420px at 50% -80px, rgba(132, 59, 169, 0.20), transparent 70%),
         var(--bg-0);
     color: var(--text-0);
-    min-height: 100vh;
     line-height: 1.55;
 }
 
