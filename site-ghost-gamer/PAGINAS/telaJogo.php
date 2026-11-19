@@ -5,8 +5,7 @@ require_once __DIR__ . "/../XAMP/csrf.php";
 
 $base = "../";
 $paginaAtual = "telaJogo.php";
-$base = "../";
-$paginaAtual = "telaJogo.php";
+
 
 $idJogo = (int) ($_GET["id"] ?? 0);
 if ($idJogo <= 0) {

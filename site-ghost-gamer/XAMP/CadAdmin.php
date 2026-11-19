@@ -71,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <h2>Nova conta administradora</h2>
-            <p class="auth-subtitulo"><?= $totalAdmins === 0 ? "Configuração inicial: crie o primeiro administrador do sistema." : "Criar um novo administrador." ?></p>
 
             <?php if ($erro): ?><div class="form-msg erro"><?= htmlspecialchars($erro) ?></div><?php endif; ?>
 
