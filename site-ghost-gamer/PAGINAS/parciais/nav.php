@@ -47,7 +47,7 @@ $nomeExib   = $logado ? ($usuarioLogado["nickname"] ?: $usuarioLogado["nome"]) :
                             <li><a href="<?= $base ?>XAMP/consulta.php"><?= icone('escudo-check', 16) ?> Consulta</a></li>
                             <li><a href="<?= $base ?>PAGINAS/cadastroEmpresa.php"><?= icone('empresa', 16) ?> Cadastro de Empresa</a></li>
                             <li><a href="<?= $base ?>PAGINAS/cadastroJogos.php"><?= icone('jogo', 16) ?> Cadastro de Jogos</a></li>
-                            <li><a href="<?= $base ?>PAGINAS/CadAdmin.php"><?= icone('perfil', 16) ?> Cadastro de Administrador</a></li>
+                            <li><a href="<?= $base ?>XAMP/CadAdmin.php"><?= icone('perfil', 16) ?> Cadastro de Administrador</a></li>
                         </ul>
                     </details>
                 </li>
