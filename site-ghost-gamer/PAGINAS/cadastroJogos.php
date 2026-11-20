@@ -60,6 +60,7 @@ $generos = ["Ação", "Aventura", "RPG", "Estratégia", "Simulação", "Esportes
             <div class="field"><label>Memória RAM (GB)</label><input type="number" name="ram_gb" min="1" required></div>
             <div class="field"><label>VRAM (GB)</label><input type="number" name="vram_gb" min="0" required></div>
             <div class="field"><label>Armazenamento (GB)</label><input type="number" name="armazenamento" min="1" required></div>
+            <div class="field"><label>Descrição do Jogo</label><textarea name="descricao" rows="5" placeholder="Digite a descrição do jogo.." required></div>
             <div class="field"><label>Imagem de capa</label><input type="file" name="foto" accept="image/png, image/jpeg, image/webp" required></div>
 
             <div class="field">

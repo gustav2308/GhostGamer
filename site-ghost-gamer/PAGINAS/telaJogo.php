@@ -69,7 +69,7 @@ function formatarTamanhoArquivo(?int $bytes): string
            <div class="informacoes-jogo">
                 <h1><?= htmlspecialchars($jogo["titulo"]) ?></h1>
                 <p class="genero-jogo"><?= htmlspecialchars($jogo["genero"] ?: "Sem gênero") ?></p>
-                <p class="empresa-jogo">Desenvolvedores: <?= htmlspecialchars($jogo["empresa_email"] ?: "Não informado") ?></p>
+                <p class="empresa-jogo">Desenvolvedor: <?= htmlspecialchars($jogo["empresa_email"] ?: "Não informado") ?></p>
 
                 <div id="msgBiblioteca" class="form-msg"></div>
 
@@ -112,8 +112,8 @@ function formatarTamanhoArquivo(?int $bytes): string
         <section class="meio-jogo">
             <div class="descricao-jogo">
                 <h2>Descrição do jogo</h2>
-                <p><?= htmlspecialchars($jogo["titulo"]) ?> é um jogo do gênero <?= htmlspecialchars($jogo["genero"] ?: "não especificado") ?>.</p>
                 <p>Para saber se o seu computador roda este jogo, use o verificador de compatibilidade ao lado.</p>
+                <p><?= htmlspecialchars($jogo["descricao"]) ?></p>
             </div>
 
             <!-- VERIFICADOR DE COMPATIBILIDADE -->

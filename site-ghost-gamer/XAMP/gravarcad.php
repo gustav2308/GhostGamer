@@ -157,6 +157,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
     $ram_gb        = $_POST['ram_gb'] ?? null;
     $vram_gb       = $_POST['vram_gb'] ?? null;
     $armazenamento = $_POST['armazenamento'] ?? null;
+    $descricao     = trim($_POST['descricao'] ?? "");
 
     $caminhoBanco = null;
 
@@ -305,6 +306,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
                 arquivo_nome_original,
                 arquivo_tamanho_bytes,
                 downloads
+                descricao
             )
          VALUES
             (
@@ -321,7 +323,8 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
                 :arquivo_jogo,
                 :arquivo_nome_original,
                 :arquivo_tamanho_bytes,
-                0
+                0,
+                :descricao
             )"
     );
 
@@ -338,7 +341,9 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
         "foto"                  => $caminhoBanco,
         "arquivo_jogo"          => $arquivoCaminhoBanco,
         "arquivo_nome_original" => $arquivoNomeOriginal,
-        "arquivo_tamanho_bytes" => $arquivoTamanho
+        "arquivo_tamanho_bytes" => $arquivoTamanho,
+        "descricao" => $descricao
+        
     ]);
 
     $idNovoJogo = (int) $pdo->lastInsertId();

@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "ram_gb" => (int) ($_POST["ram_gb"] ?? 0),
         "vram_gb" => (int) ($_POST["vram_gb"] ?? 0),
         "armazenamento" => (int) ($_POST["armazenamento"] ?? 0),
+        "descricao" => trim($_POST["descricao"] ?? ""),
         "id" => $id
     ];
 
@@ -122,7 +123,8 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
                             frequencia=:frequencia,
                             ram_gb=:ram_gb,
                             vram_gb=:vram_gb,
-                            armazenamento=:armazenamento
+                            armazenamento=:armazenamento,
+                            descricao=:decricao
                             $camposExtras
                             WHERE id_jogo=:id"
                         );
@@ -170,7 +172,8 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
             frequencia=:frequencia,
             ram_gb=:ram_gb,
             vram_gb=:vram_gb,
-            armazenamento=:armazenamento
+            armazenamento=:armazenamento,
+            descricao=:decricao
             $camposExtras
             WHERE id_jogo=:id"
         );
@@ -259,6 +262,11 @@ if (!$jogo) {
         <div class="field">
             <label>Armazenamento (GB)</label>
             <input type="number" name="armazenamento" value="<?= (int) $jogo["armazenamento"] ?>" min="0">
+        </div>
+
+        <div class="field">
+            <label>Descrição</label>
+            <textarea name="descricao" value="<?= htmlspecialchars($jogo["descricao"]) ?>" required>
         </div>
 
         <div class="field">
