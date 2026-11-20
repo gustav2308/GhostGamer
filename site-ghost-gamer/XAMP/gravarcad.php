@@ -203,12 +203,20 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
             );
         }
 
-        if (!move_uploaded_file(
-            $foto["tmp_name"],
-            $pastaImg . $nomeFoto
-        )) {
+        $destinoFoto = $pastaImg . $nomeFoto;
+
+        if (!is_writable($pastaImg)) {
             falhar(
-                "Não foi possível salvar a imagem.",
+                "Sem permissão para gravar na pasta: " . $pastaImg,
+                $ehAjax,
+                "../PAGINAS/cadastroJogos.php"
+            );
+        }
+
+        if (!move_uploaded_file($foto["tmp_name"], $destinoFoto)) {
+            falhar(
+                "Falha ao salvar a imagem. Pasta: " . $pastaImg .
+                " | Erro do PHP: " . ($_FILES["foto"]["error"] ?? "desconhecido"),
                 $ehAjax,
                 "../PAGINAS/cadastroJogos.php"
             );
