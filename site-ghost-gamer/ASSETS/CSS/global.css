@@ -95,6 +95,7 @@ body {
         var(--bg-0);
     color: var(--text-0);
     line-height: 1.55;
+    font-family: 'Atkinson Hyperlegible', sans-serif !important;
 }
 
 a { text-decoration: none; color: inherit; }
