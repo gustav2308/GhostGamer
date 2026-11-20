@@ -69,7 +69,7 @@ function formatarTamanhoArquivo(?int $bytes): string
            <div class="informacoes-jogo">
                 <h1><?= htmlspecialchars($jogo["titulo"]) ?></h1>
                 <p class="genero-jogo"><?= htmlspecialchars($jogo["genero"] ?: "Sem gênero") ?></p>
-                <p class="empresa-jogo">Desenvolvedor: <?= htmlspecialchars($jogo["empresa_email"] ?: "Não informado") ?></p>
+                <p class="empresa-jogo">Desenvolvedores: <?= htmlspecialchars($jogo["empresa_email"] ?: "Não informado") ?></p>
 
                 <div id="msgBiblioteca" class="form-msg"></div>
 
