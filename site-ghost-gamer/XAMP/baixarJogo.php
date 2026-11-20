@@ -20,8 +20,8 @@ $stmt->execute(["id" => $idJogo]);
 $jogo = $stmt->fetch();
 
 if (!$jogo || empty($jogo["arquivo_jogo"])) {
-    http_response_code(404);
-    die("Este jogo ainda não tem um arquivo para download.");
+    header("Location: ../PAGINAS/telaJogo.php?id=" . $idJogo . "&erro=arquivo_indisponivel");
+    exit;
 }
 
 $caminhoArquivo = dirname(__DIR__) . "/" . $jogo["arquivo_jogo"];
@@ -31,9 +31,15 @@ $caminhoArquivo = dirname(__DIR__) . "/" . $jogo["arquivo_jogo"];
 $pastaPermitida = realpath(dirname(__DIR__) . "/ASSETS/DOWNLOADS");
 $caminhoReal = realpath($caminhoArquivo);
 
-if ($caminhoReal === false || !str_starts_with($caminhoReal, $pastaPermitida)) {
-    http_response_code(404);
-    die("Arquivo não encontrado.");
+if (
+    $caminhoReal === false ||
+    $pastaPermitida === false ||
+    !str_starts_with($caminhoReal, $pastaPermitida . DIRECTORY_SEPARATOR) ||
+    !is_file($caminhoReal) ||
+    !is_readable($caminhoReal)
+) {
+    header("Location: ../PAGINAS/telaJogo.php?id=" . $idJogo . "&erro=arquivo_indisponivel");
+    exit;
 }
 
 $pdo->prepare("UPDATE jogo SET downloads = downloads + 1 WHERE id_jogo = :id")->execute(["id" => $idJogo]);

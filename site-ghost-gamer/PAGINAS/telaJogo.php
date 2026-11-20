@@ -73,6 +73,12 @@ function formatarTamanhoArquivo(?int $bytes): string
 
                 <div id="msgBiblioteca" class="form-msg"></div>
 
+                <?php if (($_GET["erro"] ?? "") === "arquivo_indisponivel"): ?>
+                <div class="form-msg erro" style="display: block;">
+                    O arquivo deste jogo está indisponível no momento. Tente novamente mais tarde.
+                </div>
+                <?php endif; ?>
+
                 <div class="acoes-jogo">
                     <?php if (!$logado): ?>
                         <a href="loginCliente.php?redirect=telaJogo.php?id=<?= $idJogo ?>" class="btn btn-primary">Entrar para adicionar</a>
