@@ -305,7 +305,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
                 arquivo_jogo,
                 arquivo_nome_original,
                 arquivo_tamanho_bytes,
-                downloads
+                downloads,
                 descricao
             )
          VALUES
