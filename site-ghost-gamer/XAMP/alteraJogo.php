@@ -266,7 +266,7 @@ if (!$jogo) {
 
         <div class="field">
             <label>Descrição</label>
-            <textarea name="descricao" value="<?= htmlspecialchars($jogo["descricao"]) ?>" required>
+            <textarea name="descricao" value="<?= htmlspecialchars($jogo["descricao"]) ?>" required></textarea>
         </div>
 
         <div class="field">
