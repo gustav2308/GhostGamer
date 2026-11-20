@@ -112,8 +112,12 @@ function formatarTamanhoArquivo(?int $bytes): string
         <section class="meio-jogo">
             <div class="descricao-jogo">
                 <h2>Descrição do jogo</h2>
-                <p>Para saber se o seu computador roda este jogo, use o verificador de compatibilidade ao lado.</p>
-                <p><?= htmlspecialchars($jogo["descricao"]) ?></p>
+                <?php if(empty($descricao)):?>
+                    <p>Para saber se o seu computador roda este jogo, use o verificador de compatibilidade ao lado.</p>
+                <?php else: ?>
+                    <p>Para saber se o seu computador roda este jogo, use o verificador de compatibilidade ao lado.</p>
+                    <p><?= htmlspecialchars($jogo["descricao"]) ?></p>
+                <?php endif; ?>
             </div>
 
             <!-- VERIFICADOR DE COMPATIBILIDADE -->
