@@ -193,7 +193,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
 
         $nomeFoto = $nomeJogo . "_" . uniqid() . "." . $extensao;
 
-        $pastaImg = dirname(__DIR__) . "/ASSETS/IMG/";
+        $pastaImg = dirname(__DIR__) . "/ASSETS/IMG/uploads/";
 
         if (!is_dir($pastaImg)) {
             falhar(
@@ -222,7 +222,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
             );
         }
 
-        $caminhoBanco = "ASSETS/IMG/" . $nomeFoto;
+        $caminhoBanco = "ASSETS/IMG/uploads/" . $nomeFoto;
     }
 
 
