@@ -193,11 +193,15 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
 
         $nomeFoto = $nomeJogo . "_" . uniqid() . "." . $extensao;
 
-        $pastaImg = dirname(__DIR__) . "/ASSETS/IMG/uploads/";
+        $pastaImg = dirname(__DIR__) . "/ASSETS/ARQUIVOS/IMG/uploads/";
 
-        if (!is_dir($pastaImg)) {
+       if (!is_dir($pastaImg)) {
+            mkdir($pastaImg, 0775, true);
+        }
+
+        if (!is_dir($pastaImg) || !is_writable($pastaImg)) {
             falhar(
-                "A pasta ASSETS/IMG não foi encontrada.",
+                "Não foi possível acessar ou gravar na pasta das imagens.",
                 $ehAjax,
                 "../PAGINAS/cadastroJogos.php"
             );
@@ -222,7 +226,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
             );
         }
 
-        $caminhoBanco = "ASSETS/IMG/uploads/" . $nomeFoto;
+        $caminhoBanco = "ASSETS/ARQUIVOS/IMG/uploads/" . $nomeFoto;
     }
 
 
@@ -269,7 +273,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
             $nomeArquivoFinal =
                 $nomeJogoArquivo . "_" . uniqid() . "." . $extensaoArquivo;
 
-            $pastaDownloads = dirname(__DIR__) . "/ASSETS/DOWNLOADS/";
+            $pastaDownloads = dirname(__DIR__) . "/ASSETS/ARQUIVOS/DOWNLOADS/";
 
             if (!is_dir($pastaDownloads)) {
                 mkdir($pastaDownloads, 0755, true);
@@ -286,8 +290,7 @@ if (str_contains($paginaAnterior, "cadastroJogos.php")) {
                 );
             }
 
-            $arquivoCaminhoBanco =
-                "ASSETS/DOWNLOADS/" . $nomeArquivoFinal;
+            $arquivoCaminhoBanco = "ASSETS/ARQUIVOS/DOWNLOADS/" . $nomeArquivoFinal;
 
             $arquivoNomeOriginal = $arquivo["name"];
 
