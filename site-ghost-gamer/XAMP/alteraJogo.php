@@ -173,7 +173,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
             ram_gb=:ram_gb,
             vram_gb=:vram_gb,
             armazenamento=:armazenamento,
-            descricao=:decricao,
+            descricao=:descricao,
             $camposExtras
             WHERE id_jogo=:id"
         );
@@ -319,8 +319,6 @@ if (!$jogo) {
 </main>
 
 <?php include __DIR__ . "/../PAGINAS/parciais/footer.php"; 
-header("Location: ../PAGINAS/...");
-exit;
 ?>
 
 </body>
