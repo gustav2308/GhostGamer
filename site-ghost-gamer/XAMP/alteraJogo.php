@@ -124,7 +124,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
                             ram_gb=:ram_gb,
                             vram_gb=:vram_gb,
                             armazenamento=:armazenamento,
-                            descricao=:decricao
+                            descricao=:descricao
                             $camposExtras
                             WHERE id_jogo=:id"
                         );
@@ -173,7 +173,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
             ram_gb=:ram_gb,
             vram_gb=:vram_gb,
             armazenamento=:armazenamento,
-            descricao=:decricao
+            descricao=:decricao,
             $camposExtras
             WHERE id_jogo=:id"
         );
@@ -266,7 +266,7 @@ if (!$jogo) {
 
         <div class="field">
             <label>Descrição</label>
-            <textarea name="descricao" value="<?= htmlspecialchars($jogo["descricao"]) ?>" required></textarea>
+            <textarea name="descricao" required><?= htmlspecialchars($jogo["descricao"]) ?></textarea>
         </div>
 
         <div class="field">
