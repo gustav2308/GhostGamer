@@ -100,27 +100,48 @@ const linkBaixar = document.getElementById('linkBaixarJogo');
 
 if (window.launcher && linkBaixar) {
   const texto = document.getElementById('textoBaixarJogo');
+  const tamanho = linkBaixar.querySelector('.tamanho-arquivo');
   const idJogo = new URL(linkBaixar.href).searchParams.get('id');
-  const textoOriginal = texto.textContent;
 
-  // se o jogo já está instalado neste computador
-  window.launcher.jogoInstalado(idJogo).then((instalado) => {
-    if (instalado) texto.textContent = 'Instalado ✓';
-  });
+  let estado = 'baixar'; // baixar | baixando | instalado
+
+  function mostrar(novo) {
+    estado = novo;
+    if (novo === 'instalado') {
+      texto.textContent = 'Jogar';
+      if (tamanho) tamanho.style.display = 'none';
+    } else {
+      texto.textContent = 'Baixar jogo';
+      if (tamanho) tamanho.style.display = '';
+    }
+  }
+
+  window.launcher.jogoInstalado(idJogo).then((ok) => { if (ok) mostrar('instalado'); });
 
   window.launcher.aoProgresso(({ idJogo: id, porcentagem }) => {
-    if (id === idJogo) texto.textContent = `Baixando... ${porcentagem}%`;
+    if (id !== idJogo) return;
+    estado = 'baixando';
+    texto.textContent = `Baixando... ${porcentagem}%`;
   });
 
   window.launcher.aoConcluir(({ idJogo: id, ok, erro }) => {
     if (id !== idJogo) return;
-    texto.textContent = ok ? 'Instalado ✓' : textoOriginal;
-    if (!ok) alert('Não foi possível instalar o jogo: ' + erro);
+    if (ok) {
+      mostrar('instalado');
+    } else {
+      mostrar('baixar');
+      alert('Não foi possível instalar o jogo: ' + erro);
+    }
   });
 
-  // evita baixar de novo enquanto baixa ou depois de instalado
-  linkBaixar.addEventListener('click', (e) => {
-    const t = texto.textContent;
-    if (t.startsWith('Baixando') || t.startsWith('Instalado')) e.preventDefault();
+  linkBaixar.addEventListener('click', async (e) => {
+    if (estado === 'baixando') { e.preventDefault(); return; }
+    if (estado === 'instalado') {
+      e.preventDefault();
+      const r = await window.launcher.abrirJogo(idJogo);
+      if (!r.ok && r.erro !== 'cancelado') {
+        alert('Não foi possível abrir o jogo: ' + r.erro);
+      }
+    }
   });
 }
