@@ -64,7 +64,7 @@ if (!empty($_FILES["foto"]["name"] ?? "")) {
 
     $extensao = $tiposPermitidos[$mime];
     $nomeArquivo = "cliente_{$idCliente}_" . uniqid() . "." . $extensao;
-    $pastaDestino = dirname(__DIR__) . "/ASSETS/IMG/perfil/";
+    $pastaDestino = dirname(__DIR__) . "/ASSETS/ARQUIVOS/IMG/perfil/";
 
     if (!is_dir($pastaDestino)) {
         mkdir($pastaDestino, 0755, true);
@@ -78,14 +78,21 @@ if (!empty($_FILES["foto"]["name"] ?? "")) {
     $stmtAntiga = $pdo->prepare("SELECT foto FROM clientes WHERE id_cliente = :id");
     $stmtAntiga->execute(["id" => $idCliente]);
     $fotoAntiga = $stmtAntiga->fetchColumn();
-    if ($fotoAntiga && str_contains($fotoAntiga, "ASSETS/IMG/perfil/")) {
+    if (
+        $fotoAntiga &&
+        (
+            str_contains($fotoAntiga, "ASSETS/IMG/perfil/") ||
+            str_contains($fotoAntiga, "ASSETS/ARQUIVOS/IMG/perfil/")
+        )
+    ) {
         $caminhoAntigo = dirname(__DIR__) . "/" . $fotoAntiga;
+
         if (is_file($caminhoAntigo)) {
             @unlink($caminhoAntigo);
         }
     }
 
-    $caminhoBancoFoto = "ASSETS/IMG/perfil/" . $nomeArquivo;
+    $caminhoBancoFoto = "ASSETS/ARQUIVOS/IMG/perfil/" . $nomeArquivo;
 }
 
 // -------- Verifica se o nickname já pertence a outra pessoa --------
