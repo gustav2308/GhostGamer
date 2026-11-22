@@ -93,7 +93,7 @@ function formatarTamanhoArquivo(?int $bytes): string
                     <?php if ($logado && $naBiblioteca): ?>
                         <?php if (!empty($jogo["arquivo_jogo"])): ?>
                             <a href="../XAMP/baixarJogo.php?id=<?= $idJogo ?>" class="btn btn-outline" id="linkBaixarJogo">
-                                <?= icone('download', 16) ?> Baixar jogo
+                                <?= icone('download', 16) ?> <span id="textoBaixarJogo">Baixar jogo</span>
                                 <?php $tam = formatarTamanhoArquivo($jogo["arquivo_tamanho_bytes"]); ?>
                                 <?php if ($tam): ?><span class="tamanho-arquivo">(<?= $tam ?>)</span><?php endif; ?>
                             </a>
