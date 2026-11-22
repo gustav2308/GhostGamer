@@ -28,7 +28,7 @@ $caminhoArquivo = dirname(__DIR__) . "/" . $jogo["arquivo_jogo"];
 
 // Garante que o caminho final continua dentro de ASSETS/DOWNLOADS/
 // (defesa extra contra path traversal, mesmo o valor vindo do banco).
-$pastaPermitida = realpath(dirname(__DIR__) . "/ASSETS/DOWNLOADS");
+$pastaPermitida = realpath(dirname(__DIR__) . "/ASSETS/ARQUIVOS/DOWNLOADS");
 $caminhoReal = realpath($caminhoArquivo);
 
 if (
