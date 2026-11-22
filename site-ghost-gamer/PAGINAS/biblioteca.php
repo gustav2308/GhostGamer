@@ -26,7 +26,7 @@ $jogoRecente = $jogos[0] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost Gamer  Biblioteca</title>
+    <title>Ghost Gamer - Biblioteca</title>
     <link rel="stylesheet" href="../ASSETS/CSS/global.css">
     <link rel="stylesheet" href="../ASSETS/CSS/biblioteca.css">
 </head>
