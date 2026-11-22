@@ -102,7 +102,6 @@ if (window.launcher && linkBaixar) {
   const texto = document.getElementById('textoBaixarJogo');
   const tamanho = linkBaixar.querySelector('.tamanho-arquivo');
   const idJogo = new URL(linkBaixar.href).searchParams.get('id');
-
   let estado = 'baixar'; // baixar | baixando | instalado
 
   function mostrar(novo) {
