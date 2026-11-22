@@ -95,3 +95,32 @@ formCompat?.addEventListener("submit", (e) => {
     resultadoCompat.innerHTML = veredito + linhas;
     resultadoCompat.classList.add("ativo");
 });
+
+const linkBaixar = document.getElementById('linkBaixarJogo');
+
+if (window.launcher && linkBaixar) {
+  const texto = document.getElementById('textoBaixarJogo');
+  const idJogo = new URL(linkBaixar.href).searchParams.get('id');
+  const textoOriginal = texto.textContent;
+
+  // se o jogo já está instalado neste computador
+  window.launcher.jogoInstalado(idJogo).then((instalado) => {
+    if (instalado) texto.textContent = 'Instalado ✓';
+  });
+
+  window.launcher.aoProgresso(({ idJogo: id, porcentagem }) => {
+    if (id === idJogo) texto.textContent = `Baixando... ${porcentagem}%`;
+  });
+
+  window.launcher.aoConcluir(({ idJogo: id, ok, erro }) => {
+    if (id !== idJogo) return;
+    texto.textContent = ok ? 'Instalado ✓' : textoOriginal;
+    if (!ok) alert('Não foi possível instalar o jogo: ' + erro);
+  });
+
+  // evita baixar de novo enquanto baixa ou depois de instalado
+  linkBaixar.addEventListener('click', (e) => {
+    const t = texto.textContent;
+    if (t.startsWith('Baixando') || t.startsWith('Instalado')) e.preventDefault();
+  });
+}
