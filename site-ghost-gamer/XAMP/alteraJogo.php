@@ -54,7 +54,7 @@ if (!$erro && $erroFoto === UPLOAD_ERR_OK) {
         $erro = "A imagem precisa ser JPG, JPEG, PNG ou WEBP.";
     } else {
 
-        $pastaImagens = dirname(__DIR__) . "/ASSETS/IMG/";
+        $pastaImagens = dirname(__DIR__) . "/ASSETS/ARQUIVOS/IMG/uploads/";
 
         if (!is_dir($pastaImagens)) {
             mkdir($pastaImagens, 0755, true);
@@ -66,7 +66,7 @@ if (!$erro && $erroFoto === UPLOAD_ERR_OK) {
         if (!move_uploaded_file($foto["tmp_name"], $caminhoFoto)) {
             $erro = "Não foi possível salvar a nova imagem.";
         } else {
-            $dados["foto"] = "ASSETS/IMG/" . $nomeFoto;
+            $dados["foto"] = "ASSETS/ARQUIVOS/IMG/uploads/" . $nomeFoto;
             $camposExtras .= ", foto = :foto";
         }
     }
@@ -81,7 +81,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
         if (!in_array($extensao, ["zip", "exe"], true)) {
             $erro = "O arquivo do jogo precisa ser .zip ou .exe.";
         } else {
-            $pastaDownloads = dirname(__DIR__) . "/ASSETS/DOWNLOADS/";
+            $pastaDownloads = dirname(__DIR__) . "/ASSETS/ARQUIVOS/DOWNLOADS/";
 
             if (!is_dir($pastaDownloads)) {
                 if (!mkdir($pastaDownloads, 0755, true)) {
@@ -103,7 +103,7 @@ $erroUpload = $_FILES["arquivo_jogo"]["error"] ?? UPLOAD_ERR_NO_FILE;
                     $stmtAntigo->execute(["id" => $id]);
                     $antigo = $stmtAntigo->fetchColumn();
 
-                    $dados["arquivo_jogo"] = "ASSETS/DOWNLOADS/" . $nomeArquivoFinal;
+                    $dados["arquivo_jogo"] = "ASSETS/ARQUIVOS/DOWNLOADS/" . $nomeArquivoFinal;
                     $dados["arquivo_nome_original"] = $arquivo["name"];
                     $dados["arquivo_tamanho_bytes"] = filesize($caminhoNovo);
 

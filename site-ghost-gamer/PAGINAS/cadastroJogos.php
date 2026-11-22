@@ -52,7 +52,7 @@ $generos = ["Ação", "Aventura", "RPG", "Estratégia", "Simulação", "Esportes
                         <option value="<?= htmlspecialchars($genero) ?>"><?= htmlspecialchars($genero) ?></option>
                     <?php endforeach; ?>
                 </select>
-
+            </div>
             <div class="field"><label>Núcleos (mínimo)</label><input type="number" name="nucleos" min="1" required></div>
             <div class="field"><label>Threads (mínimo)</label><input type="number" name="threads" min="1" required></div>
             <div class="field"><label>Frequência (GHz)</label><input type="number" step="0.1" name="frequencia" min="0" required></div>
