@@ -595,6 +595,7 @@ h1, h2, h3, h4 {
     align-items: center;
     gap: 10px;
     background: transparent;
+    margin-left: 20px;
     border: 0;
     color: inherit;
     cursor: pointer;
