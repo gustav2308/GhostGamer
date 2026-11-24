@@ -176,7 +176,7 @@ $totalJogos = count($jogos);
                 </div>
 
                 <a id="ghostAppDownloadHome"
-                    href="/ASSETS/DOWNLOADS/GhostGamer-Windows-Teste.exe"
+                    href="/ASSETS/DOWNLOADS/"
                     download="GhostGamer-Windows-Teste.exe">
 
                     <svg aria-hidden="true" width="20" height="20"
