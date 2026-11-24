@@ -22,6 +22,7 @@ if ($generoSelecionado !== "") {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <link rel="manifest" href="../manifest.webmanifest">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghost Gamer - Categorias</title>
     <link rel="stylesheet" href="../ASSETS/CSS/global.css">

@@ -584,3 +584,26 @@ h1, h2, h3, h4 {
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
+
+#ghostAppDownloadItem[hidden],
+#ghostAppInstallItem[hidden] {
+    display: none !important;
+}
+
+.ghost-install-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.ghost-install-button:hover {
+    background: rgba(255,255,255,.08);
+}

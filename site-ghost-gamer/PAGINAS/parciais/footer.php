@@ -49,3 +49,5 @@ $base = $base ?? "";
     <div id="toast-container" class="toast-container"></div>
 
     <script src="<?= $base ?>ASSETS/JS/global.js"></script>
+
+    <script src="<?= $base ?>ASSETS/JS/instalarApp.js"></script>
