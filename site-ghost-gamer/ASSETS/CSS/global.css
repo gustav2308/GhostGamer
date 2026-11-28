@@ -585,7 +585,6 @@ h1, h2, h3, h4 {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
-#ghostAppDownloadItem[hidden],
 #ghostAppInstallItem[hidden] {
     display: none !important;
 }

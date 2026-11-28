@@ -36,8 +36,6 @@ $nomeExib   = $logado ? ($usuarioLogado["nickname"] ?: $usuarioLogado["nome"]) :
             <li><a class="<?= $paginaAtual === 'categoria.php' ? 'ativo' : '' ?>" href="<?= $base ?>PAGINAS/categoria.php"><?= icone('categoria', 18) ?><span>Categorias</span></a></li>
             <li><a class="<?= $paginaAtual === 'biblioteca.php' ? 'ativo' : '' ?>" href="<?= $base ?>PAGINAS/biblioteca.php"><?= icone('biblioteca', 18) ?><span>Biblioteca</span></a></li>
             <li><a class="<?= $paginaAtual === 'suporte.php' ? 'ativo' : '' ?>" href="<?= $base ?>PAGINAS/suporte.php"><?= icone('suporte', 18) ?><span>Suporte</span></a></li>
-            <li id="ghostAppDownloadItem"><a id="ghostAppDownload" href="<?= $base ?>ASSETS/DOWNLOADS/GhostGamer-Windows-Teste.exe" download="GhostGamer-Windows-Teste.exe"><?= icone('download', 18) ?><span>Baixar app Windows</span></a></li>
-            <li id="ghostAppInstallItem" hidden><button type="button" id="ghostAppInstall" class="ghost-install-button"><?= icone('download', 18) ?><span>Instalar aplicativo</span></button></li>
         </ul>
 
         <ul class="menu-conta">
