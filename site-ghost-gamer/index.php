@@ -195,31 +195,18 @@ $totalJogos = count($jogos);
         <script>
             (() => {
                 const area = document.getElementById('ghostAppDownloadArea');
-                const link = document.getElementById('ghostAppDownloadHome');
-                const chave = 'ghostGamerWindowsExeBaixado';
+
+                if (!area) return;
 
                 const modoApp =
                     window.matchMedia('(display-mode: standalone)').matches ||
                     window.matchMedia('(display-mode: minimal-ui)').matches ||
                     new URLSearchParams(location.search).get('app') === '1';
 
-                if (!area || !link) return;
-
-                try {
-                    if (modoApp || localStorage.getItem(chave) === 'sim') {
-                        area.hidden = true;
-                    }
-                } catch (e) {
-                    if (modoApp) area.hidden = true;
-                }
-
-                link.addEventListener('click', () => {
-                    try {
-                        localStorage.setItem(chave, 'sim');
-                    } catch (e) {}
-
+                // Oculta somente se estiver aberto como aplicativo instalado.
+                if (modoApp) {
                     area.hidden = true;
-                });
+                }
             })();
         </script>
 
